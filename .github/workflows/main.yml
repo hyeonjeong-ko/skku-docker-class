@@ -32,7 +32,6 @@ jobs:
         with:
           python-version: 3.8 # Modify python version HERE
 
-
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
         with:
@@ -43,8 +42,16 @@ jobs:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
 
-      # Docker Compose 실행
-      - name: Deploy with Docker Compose
+
+      # Docker Hub에서 이미지 내려받기 및 실행
+      - name: Pull and run Docker image from Docker Hub
         run: |
-          docker-compose down
-          docker-compose up -d
+          function stop_and_pull_run_image() {
+            CONTAINER_ID=$(docker ps -q --filter ancestor=dianalove/fastapi_git:latest)
+            if [ ! -z "$CONTAINER_ID" ]; then
+              docker stop $CONTAINER_ID
+            fi
+            docker pull dianalove/fastapi_git:latest
+            docker run -d -p 80:80 dianalove/fastapi_git:latest
+          }
+          stop_and_pull_run_image
