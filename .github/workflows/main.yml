@@ -33,4 +33,6 @@ jobs:
 
       # Docker Compose 실행
       - name: Deploy with Docker Compose
-        run: docker-compose up -d
+        run: |
+          docker-compose down
+          docker-compose up -d

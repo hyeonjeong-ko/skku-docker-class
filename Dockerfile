@@ -2,7 +2,6 @@
 FROM tiangolo/uvicorn-gunicorn-fastapi:python3.8
 RUN pip install "fastapi[all]"
 RUN pip install cryptography
-RUN pip install fastapi uvicorn pymysql
 
 
 
