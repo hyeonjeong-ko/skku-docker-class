@@ -10,4 +10,6 @@ templates = Jinja2Templates(directory="app/templates")
 
 @app.get("/", response_class=HTMLResponse)
 async def read_index(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request, "name": "현정이"})
+    return templates.TemplateResponse(
+        "index.html", {"request": request, "name": "세번째테스트"}
+    )
