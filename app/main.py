@@ -5,11 +5,11 @@ import os
 
 app = FastAPI()
 
-templates = Jinja2Templates(directory="app/templates")
+templates = Jinja2Templates(directory="templates")
 
 
 @app.get("/", response_class=HTMLResponse)
 async def read_index(request: Request):
     return templates.TemplateResponse(
-        "index.html", {"request": request, "name": "test5"}
+        "index.html", {"request": request, "name": "test7"}
     )
